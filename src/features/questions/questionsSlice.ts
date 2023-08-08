@@ -2,22 +2,20 @@ import {
     createSlice,
     createAsyncThunk,
     createEntityAdapter,
-    PayloadAction
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
 import { QuestionsState } from "../../interfaces/QuestionsState";
 
-const QUESTIONS_URL = 'https://opentdb.com/api.php?amount=10';
+const QUESTIONS_URL = 'https://the-trivia-api.com/v2/questions';
 
 const questionsAdapter = createEntityAdapter({
-    sortComparer: (a: any, b: any) => b.date.localeCompare(a.date)
+    sortComparer: (a: any, b: any) => b.id.localeCompare(a.id)
 });
 
 const initialState: QuestionsState = questionsAdapter.getInitialState({
     status: 'idle', // all variants -> idle, loading, succeeded, failed
     error: null,
-    questions: [],
 });
 
 export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async () => {
@@ -31,25 +29,23 @@ const questionsSlice = createSlice({
     name: 'questions',
     initialState,
     reducers: {
-        addQuestion: (state, action: PayloadAction<string>) => {
-            state.questions.push(action.payload);
-        }
     },
     extraReducers(builder) {
         builder
-        .addCase(fetchQuestions.pending, (state, action) => {
-            state.status = 'loading';
-        })
-        .addCase(fetchQuestions.fulfilled, (state, action) => {
-            state.status = 'succeeded';
-            questionsAdapter.upsertMany(state as any, action.payload)
-        })
-        .addCase(fetchQuestions.rejected, (state, action) => {
-            state.status = 'failed';
-            if (state.error) {
-                state.error = action.error.message as any;
-            }
-        })
+            .addCase(fetchQuestions.pending, (state, action) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchQuestions.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+
+                questionsAdapter.setAll(state as any, action.payload);
+            })
+            .addCase(fetchQuestions.rejected, (state, action) => {
+                state.status = 'failed';
+                if (state.error) {
+                    state.error = action.error.message as any;
+                }
+            })
     },
 });
 
@@ -60,5 +56,9 @@ export const {
 } = questionsAdapter.getSelectors((state: any) => {
     return state.questions
 });
+
+export const getQuestionsStatus = (state: any) => state.questions.status;
+export const getQuestionsError = (state: any) => state.questions.error;
+// export const getQuestions = (state: any) => state.questions.entities;
 
 export default questionsSlice.reducer;
