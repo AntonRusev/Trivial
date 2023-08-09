@@ -1,5 +1,5 @@
 export interface QuestionsState {
-    status: string; 
+    status: string;
     error: Error | null;
     questionIndex: number;
 }

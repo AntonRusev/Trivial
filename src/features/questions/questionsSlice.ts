@@ -6,6 +6,7 @@ import {
 import axios from "axios";
 
 import { QuestionsState } from "../../interfaces/QuestionsState";
+import { StatusCode } from "../../utils/statusCode";
 
 const QUESTIONS_URL = 'https://the-trivia-api.com/v2/questions';
 
@@ -14,7 +15,7 @@ const questionsAdapter = createEntityAdapter({
 });
 
 const initialState: QuestionsState = questionsAdapter.getInitialState({
-    status: 'idle', // all variants -> idle, loading, succeeded, failed
+    status: StatusCode.IDLE, // all variants -> idle, loading, succeeded, failed
     error: null,
     questionIndex: 0,
 });
@@ -41,15 +42,15 @@ const questionsSlice = createSlice({
     extraReducers(builder) {
         builder
             .addCase(fetchQuestions.pending, (state) => {
-                state.status = 'loading';
+                state.status = StatusCode.LOADING;
             })
             .addCase(fetchQuestions.fulfilled, (state, action) => {
-                state.status = 'succeeded';
+                state.status = StatusCode.SUCCEEDED;
 
                 questionsAdapter.setAll(state as any, action.payload);
             })
             .addCase(fetchQuestions.rejected, (state, action) => {
-                state.status = 'failed';
+                state.status = StatusCode.FAILED;
                 if (state.error) {
                     state.error = action.error.message as any;
                 }

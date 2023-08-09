@@ -10,8 +10,8 @@ import {
     selectQuestionIds,
     nextQuestionId
 } from "./questionsSlice";
-
 import QuestionItem from "./QuestionItem";
+import { StatusCode } from "../../utils/statusCode";
 
 
 const QuestionsList = () => {
@@ -23,20 +23,20 @@ const QuestionsList = () => {
     const currentQuestionIndex = useSelector(getQuestionIndex)
 
     useEffect(() => {
-        if (questionsStatus === 'idle') {
+        if (questionsStatus === StatusCode.IDLE) {
             dispatch(fetchQuestions());
         }
     }, [questionsStatus, dispatch]);
 
     let content;
 
-    if (questionsStatus === 'loading') {
+    if (questionsStatus === StatusCode.LOADING) {
         content = <p>Loading...</p>
-    } else if (questionsStatus === 'succeeded') {
+    } else if (questionsStatus === StatusCode.SUCCEEDED) {
         // content = questionsIds.map(questionId => <QuestionItem key={questionId} questionId={questionId} />)
         content = <QuestionItem key={questionsIds[currentQuestionIndex]} questionId={questionsIds[currentQuestionIndex]} />
     }
-    else if (questionsStatus === 'failed') {
+    else if (questionsStatus === StatusCode.FAILED) {
         content = <p>{error!.toString()}</p>
     };
 
