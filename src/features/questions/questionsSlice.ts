@@ -18,6 +18,8 @@ const initialState: QuestionsState = questionsAdapter.getInitialState({
     status: StatusCode.IDLE, // all variants -> idle, loading, succeeded, failed
     error: null,
     questionIndex: 0,
+    currentQuestion: 1,
+    questionsDifficulty: "easy"
 });
 
 export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async (DIFFICULTY: any) => {
@@ -37,6 +39,12 @@ const questionsSlice = createSlice({
             } else {
                 state.questionIndex = state.questionIndex + 1;
             };
+        },
+        changeCurrentQuestion(state) {
+            state.currentQuestion =  state.currentQuestion + 1;
+        },
+        changeDifficulty(state, action) {
+            state.questionsDifficulty = action.payload;
         },
     },
     extraReducers(builder) {
@@ -70,6 +78,6 @@ export const getQuestionsStatus = (state: any) => state.questions.status;
 export const getQuestionsError = (state: any) => state.questions.error;
 export const getQuestionIndex = (state: any) => state.questions.questionIndex;
 
-export const { nextQuestionId } = questionsSlice.actions;
+export const { nextQuestionId, changeCurrentQuestion, changeDifficulty} = questionsSlice.actions;
 
 export default questionsSlice.reducer;

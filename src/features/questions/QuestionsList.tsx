@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { AppDispatch, RootState } from "../../app/store";
@@ -8,7 +8,9 @@ import {
     getQuestionsError,
     getQuestionsStatus,
     selectQuestionIds,
-    nextQuestionId
+    nextQuestionId,
+    changeCurrentQuestion,
+    changeDifficulty,
 } from "./questionsSlice";
 import QuestionItem from "./QuestionItem";
 import { StatusCode } from "../../utils/statusCode";
@@ -16,33 +18,39 @@ import { DifficultiesCode } from "../../utils/difficultiesCode";
 
 
 const QuestionsList = () => {
-    const [questionNumber, setQuestionNumber] = useState(1);
-    const [currentDifficulty, setCurrectDifficulty] = useState('easy')
     const dispatch = useDispatch<AppDispatch>();
 
     const questionsIds = useSelector(selectQuestionIds);
     const questionsStatus = useSelector(getQuestionsStatus);
     const error = useSelector(getQuestionsError);
-    const currentQuestionIndex = useSelector(getQuestionIndex);
+    const questionIndex = useSelector(getQuestionIndex);
+    const currentQuestion = useSelector((state: any) => state.questions.currentQuestion);
+    const questionsDifficulty = useSelector((state: any) => state.questions.questionsDifficulty);
 
+    // Fetch initial data upon start (first 10 questions are difficulty: east)
     useEffect(() => {
         if (questionsStatus === StatusCode.IDLE) {
             dispatch(fetchQuestions(DifficultiesCode.EASY));
         }
     }, [questionsStatus, dispatch]);
 
+    // Fetch questions' difficulty depending on progression
     useEffect(() => {
-        if (questionNumber > 10 && currentDifficulty === 'easy') {
+        if (currentQuestion > 10 && questionsDifficulty === 'easy') {
+            // After the first 10 questions set difficulty to medium 
             dispatch(fetchQuestions(DifficultiesCode.MEDIUM));
-            setCurrectDifficulty('medium');
-        } else if (questionNumber > 20 && currentDifficulty === 'medium') {
+            dispatch(changeDifficulty('medium'));
+        } else if (currentQuestion > 20 && questionsDifficulty === 'medium') {
+            // After the first 20 questions set difficulty to hard 
             dispatch(fetchQuestions(DifficultiesCode.HARD));
-            setCurrectDifficulty('hard');
-        } else if (questionNumber > 30 && currentDifficulty === 'hard') {
-            dispatch(fetchQuestions(DifficultiesCode.EASY));
-            setCurrectDifficulty('easy');
-        };
-    }, [questionNumber, dispatch]);
+            dispatch(changeDifficulty('hard'));
+        } 
+        // else if (currentQuestion > 30 && questionsDifficulty === 'hard') {
+        //     // Reset difficulty to easy
+        //     dispatch(fetchQuestions(DifficultiesCode.EASY));
+        //     dispatch(changeDifficulty('easy'));
+        // };
+    }, [currentQuestion, questionsDifficulty, dispatch]);
 
     let content;
 
@@ -50,7 +58,7 @@ const QuestionsList = () => {
         content = <p>Loading...</p>
     } else if (questionsStatus === StatusCode.SUCCEEDED) {
         // content = questionsIds.map(questionId => <QuestionItem key={questionId} questionId={questionId} />)
-        content = <QuestionItem key={questionsIds[currentQuestionIndex]} questionId={questionsIds[currentQuestionIndex]} />
+        content = <QuestionItem key={questionsIds[questionIndex]} questionId={questionsIds[questionIndex]} />
     }
     else if (questionsStatus === StatusCode.FAILED) {
         content = <p>{error!.toString()}</p>
@@ -61,9 +69,9 @@ const QuestionsList = () => {
             <div>{content}</div>
             <button onClick={() => {
                 dispatch(nextQuestionId(questionsIds.length));
-                setQuestionNumber(state => state + 1);
-                }}>
-                Next {currentQuestionIndex}
+                dispatch(changeCurrentQuestion());
+            }}>
+                Next {questionIndex}
             </button>
         </section>
     );
