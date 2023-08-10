@@ -3,7 +3,7 @@ import { ScoreState } from "../../interfaces/ScoreState";
 
 const initialState: ScoreState = {
     score: 0,
-    streak: 0,
+    streak: 1,
 };
 
 export const scoreSlice = createSlice({
@@ -20,7 +20,7 @@ export const scoreSlice = createSlice({
         },
         streakEnd: (state) => {
             // Ending streak on wrong answer
-            state.streak = 0;
+            state.streak = 1;
         },
     }
 });

@@ -1,7 +1,11 @@
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { selectQuestionById } from "./questionsSlice";
+import {
+    scoreIncrease,
+    streakBonus,
+    streakEnd
+} from "../score/scoreSlice";
 import { answerShuffler } from '../../utils/answerShuffler';
 
 const QuestionItem = ({
@@ -9,18 +13,8 @@ const QuestionItem = ({
 }: {
     questionId: string
 }) => {
-    const [selectedAnswer, setSelectedAnswer] = useState('');
+    const dispatch = useDispatch();
     const question = useSelector(state => selectQuestionById(state, questionId));
-
-    useEffect(() => {
-        setSelectedAnswer('');
-    }, []);
-
-    useEffect(() => {
-        if (selectedAnswer !== '') {
-
-        }
-    }, [selectedAnswer]);
 
     // Shuffling(randomizing) the order of the answers 
     const shuffledAnswers = answerShuffler([...question.incorrectAnswers, question.correctAnswer]);
@@ -31,9 +25,16 @@ const QuestionItem = ({
             const correctAnswer = document.getElementById('crrct');
             correctAnswer!.classList.add("bg-blue-700");
             e.target.classList.add('bg-red-700');
+
+            // Ending the streak of correct answers
+            dispatch(streakEnd());
         } else {
             // In case of correct answer coloring it green
             e.target.classList.add('bg-green-700');
+
+            // Adding points to the score and increasing the streak of correct answers
+            dispatch(scoreIncrease());
+            dispatch(streakBonus());
         };
 
         // Making the answers unclickable afet the first select

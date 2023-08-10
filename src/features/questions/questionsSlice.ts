@@ -20,8 +20,8 @@ const initialState: QuestionsState = questionsAdapter.getInitialState({
     questionIndex: 0,
 });
 
-export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async () => {
-    const response = await axios.get(QUESTIONS_URL);
+export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async (DIFFICULTY: any) => {
+    const response = await axios.get(QUESTIONS_URL + DIFFICULTY);
     return [...response.data];
 });
 
