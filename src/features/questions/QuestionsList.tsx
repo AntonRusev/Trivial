@@ -20,7 +20,7 @@ const QuestionsList = () => {
     const questionsIds = useSelector(selectQuestionIds);
     const questionsStatus = useSelector(getQuestionsStatus);
     const error = useSelector(getQuestionsError);
-    const currentQuestionIndex = useSelector(getQuestionIndex)
+    const currentQuestionIndex = useSelector(getQuestionIndex);
 
     useEffect(() => {
         if (questionsStatus === StatusCode.IDLE) {
