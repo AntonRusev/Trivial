@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import questionsReducer from "../features/questions/questionsSlice";
 import scoreReducer from "../features/score/scoreSlice";
+import timerReducer from "../features/timer/timerSlice"
+import questionsReducer from "../features/questions/questionsSlice";
 
 export const store = configureStore({
     reducer: {
-        questions: questionsReducer,
         score: scoreReducer,
+        timer: timerReducer,
+        questions: questionsReducer,
     },
 });
 

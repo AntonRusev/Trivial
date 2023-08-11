@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import QuestionsList from "../features/questions/QuestionsList";
 import { ScoreBoard } from "../features/score/ScoreBoard";
+import { Timer } from "../features/timer/Timer";
 
 export const Home = () => {
     const [startGame, setStartGame] = useState(false);
@@ -11,6 +12,7 @@ export const Home = () => {
             {startGame
                 ?
                 <div>
+                    <Timer />
                     <ScoreBoard />
                     <QuestionsList />
                     <button onClick={() => setStartGame(false)}>
