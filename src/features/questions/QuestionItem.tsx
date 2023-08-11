@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 
+import { useQuestionFormat } from "../../hooks/useQuestionFormat";
+
 import { selectQuestionById } from "./questionsSlice";
 import {
     scoreIncrease,
     streakBonus,
     streakEnd
 } from "../score/scoreSlice";
-import { answerShuffler } from '../../utils/answerShuffler';
 
 const QuestionItem = ({
     questionId
@@ -16,8 +17,7 @@ const QuestionItem = ({
     const dispatch = useDispatch();
     const question = useSelector(state => selectQuestionById(state, questionId));
 
-    // Shuffling(randomizing) the order of the answers 
-    const shuffledAnswers = answerShuffler([...question.incorrectAnswers, question.correctAnswer]);
+    const { shuffledAnswers } = useQuestionFormat(question);
 
     const selectAnswer = (e: any) => {
         if (e.target.name !== question.correctAnswer) {
@@ -48,7 +48,7 @@ const QuestionItem = ({
             <p>Difficulty: {question.difficulty}</p>
             <p>{question.question.text}</p>
             <div id="answers">
-                {/* Markign the correct answer with extra className */}
+                {/* Marking the correct answer with extra className */}
                 {shuffledAnswers.map((a) => {
                     if (a === question.correctAnswer) {
                         return <button onClick={(e) => selectAnswer(e)} key={a} name={a} id="crrct" className="mr-4 ml-4 crrc">{a}</button>

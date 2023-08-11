@@ -44,12 +44,7 @@ const QuestionsList = () => {
             // After the first 20 questions set difficulty to hard 
             dispatch(fetchQuestions(DifficultiesCode.HARD));
             dispatch(changeDifficulty('hard'));
-        } 
-        // else if (currentQuestion > 30 && questionsDifficulty === 'hard') {
-        //     // Reset difficulty to easy
-        //     dispatch(fetchQuestions(DifficultiesCode.EASY));
-        //     dispatch(changeDifficulty('easy'));
-        // };
+        };
     }, [currentQuestion, questionsDifficulty, dispatch]);
 
     let content;

@@ -19,7 +19,7 @@ const initialState: QuestionsState = questionsAdapter.getInitialState({
     error: null,
     questionIndex: 0,
     currentQuestion: 1,
-    questionsDifficulty: "easy"
+    questionsDifficulty: "easy",
 });
 
 export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async (DIFFICULTY: any) => {
@@ -33,15 +33,15 @@ const questionsSlice = createSlice({
     initialState,
     reducers: {
         nextQuestionId(state, action) {
-            if (state.questionIndex >= action.payload - 1) {
+            if (Number(state.questionIndex) >= Number(action.payload - 1)) {
                 // rewinding to the first Id
                 state.questionIndex = 0;
             } else {
-                state.questionIndex = state.questionIndex + 1;
+                state.questionIndex = Number(state.questionIndex) + 1;
             };
         },
         changeCurrentQuestion(state) {
-            state.currentQuestion =  state.currentQuestion + 1;
+            state.currentQuestion =  Number(state.currentQuestion) + 1;
         },
         changeDifficulty(state, action) {
             state.questionsDifficulty = action.payload;
