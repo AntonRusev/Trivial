@@ -1,12 +1,12 @@
 export interface singleQuestionState {
-    category: String;
-    correctAnswer: String;
-    difficulty: String;
-    id: String;
-    incorrectAnswers: [String];
+    category: string;
+    correctAnswer: string;
+    difficulty: string;
+    id: string;
+    incorrectAnswers: [string];
     isNiche: Boolean;
     question: Object;
-    regions: [String];
-    tags: [String];
-    type: String;
+    regions: [string];
+    tags: [string];
+    type: string;
 };

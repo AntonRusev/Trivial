@@ -16,6 +16,7 @@ const QuestionItem = ({
 }) => {
     const dispatch = useDispatch();
     const question = useSelector(state => selectQuestionById(state, questionId));
+    const questionsDifficulty = useSelector((state: any) => state.questions.questionsDifficulty);
 
     const { shuffledAnswers } = useQuestionFormat(question);
 
@@ -33,7 +34,7 @@ const QuestionItem = ({
             e.target.classList.add('bg-green-700');
 
             // Adding points to the score and increasing the streak of correct answers
-            dispatch(scoreIncrease());
+            dispatch(scoreIncrease(questionsDifficulty));
             dispatch(streakBonus());
         };
 

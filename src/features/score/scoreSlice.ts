@@ -10,9 +10,15 @@ export const scoreSlice = createSlice({
     name: 'score',
     initialState,
     reducers: {
-        scoreIncrease: (state) => {
+        scoreIncrease: (state, action) => {
             // Increasing score points on correct answer
-            state.score += (100 * state.streak);
+            if (action.payload === 'medium') {
+                state.score += (300 * state.streak);
+            } else if (action.payload === 'hard') {
+                state.score += (500 * state.streak);
+            } else {
+                state.score += (100 * state.streak);
+            };
         },
         streakBonus: (state) => {
             // On two or more consecutive correct answers

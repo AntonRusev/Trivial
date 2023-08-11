@@ -1,7 +1,7 @@
 export interface QuestionsState {
-    status: String;
+    status: string;
     error: Error | null;
-    questionIndex: Number;
-    currentQuestion: Number;
-    questionsDifficulty: String;
+    questionIndex: number;
+    currentQuestion: number;
+    questionsDifficulty: string;
 };

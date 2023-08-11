@@ -33,15 +33,15 @@ const questionsSlice = createSlice({
     initialState,
     reducers: {
         nextQuestionId(state, action) {
-            if (Number(state.questionIndex) >= Number(action.payload - 1)) {
+            if (state.questionIndex >= action.payload - 1) {
                 // rewinding to the first Id
                 state.questionIndex = 0;
             } else {
-                state.questionIndex = Number(state.questionIndex) + 1;
+                state.questionIndex = state.questionIndex + 1;
             };
         },
         changeCurrentQuestion(state) {
-            state.currentQuestion =  Number(state.currentQuestion) + 1;
+            state.currentQuestion = state.currentQuestion + 1;
         },
         changeDifficulty(state, action) {
             state.questionsDifficulty = action.payload;
@@ -61,7 +61,7 @@ const questionsSlice = createSlice({
                 state.status = StatusCode.FAILED;
                 if (state.error) {
                     state.error = action.error.message as any;
-                }
+                };
             })
     },
 });
@@ -78,6 +78,6 @@ export const getQuestionsStatus = (state: any) => state.questions.status;
 export const getQuestionsError = (state: any) => state.questions.error;
 export const getQuestionIndex = (state: any) => state.questions.questionIndex;
 
-export const { nextQuestionId, changeCurrentQuestion, changeDifficulty} = questionsSlice.actions;
+export const { nextQuestionId, changeCurrentQuestion, changeDifficulty } = questionsSlice.actions;
 
 export default questionsSlice.reducer;

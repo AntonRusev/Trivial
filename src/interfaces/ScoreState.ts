@@ -1,4 +1,4 @@
 export interface ScoreState {
-    score: Number;
-    streak: Number;
+    score: number;
+    streak: number;
 };
