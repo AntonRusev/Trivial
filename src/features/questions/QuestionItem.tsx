@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useQuestionFormat } from "../../hooks/useQuestionFormat";
+import { useQuestionFormater } from "../../hooks/useQuestionFormater";
 
 import { selectQuestionById } from "./questionsSlice";
 import {
@@ -8,6 +9,7 @@ import {
     streakBonus,
     streakEnd
 } from "../score/scoreSlice";
+import { activateTimer, resetTimer, stopTimer } from '../timer/timerSlice';
 
 const QuestionItem = ({
     questionId
@@ -17,30 +19,59 @@ const QuestionItem = ({
     const dispatch = useDispatch();
     const question = useSelector(state => selectQuestionById(state, questionId));
     const questionsDifficulty = useSelector((state: any) => state.questions.questionsDifficulty);
+    const timerSeconds = useSelector((state: any) => state.timer.seconds);
+    const timerIsActive = useSelector((state: any) => state.timer.isActive);
 
-    const { shuffledAnswers } = useQuestionFormat(question);
+    const { shuffledAnswers } = useQuestionFormater(question);
+
+    // Resetting the timer on each question
+    useEffect(() => {
+        dispatch(resetTimer());
+        dispatch(activateTimer());
+    }, []);
+
+    // If time runs out
+    useEffect(() => {
+        if (timerIsActive && timerSeconds === 0) {
+            lockAnswers();
+            answerFail();
+            dispatch(stopTimer());
+        }
+    }, [timerSeconds, timerIsActive]);
+
+    const answerFail = () => {
+        // In case of wrong answer coloring the correct blue
+        const correctAnswer = document.getElementById('crrct');
+        correctAnswer!.classList.add("bg-blue-700");
+
+        // Ending the streak of correct answers
+        dispatch(streakEnd());
+    };
+
+    const answerSuccess = () => {
+        // Adding points to the score and increasing the streak of correct answers
+        dispatch(scoreIncrease(questionsDifficulty));
+        dispatch(streakBonus());
+    };
+
+    const lockAnswers = () => {
+        // Making the answers unclickable after answer is selected or time is up
+        const answersDiv = document.getElementById('answers');
+        answersDiv!.style.pointerEvents = "none";
+        dispatch(stopTimer());
+    };
 
     const selectAnswer = (e: any) => {
         if (e.target.name !== question.correctAnswer) {
-            // In case of wrong answer coloring it red and the correct blue
-            const correctAnswer = document.getElementById('crrct');
-            correctAnswer!.classList.add("bg-blue-700");
+            // In case of wrong answer coloring it red
             e.target.classList.add('bg-red-700');
-
-            // Ending the streak of correct answers
-            dispatch(streakEnd());
+            answerFail();
         } else {
             // In case of correct answer coloring it green
             e.target.classList.add('bg-green-700');
-
-            // Adding points to the score and increasing the streak of correct answers
-            dispatch(scoreIncrease(questionsDifficulty));
-            dispatch(streakBonus());
+            answerSuccess();
         };
-
-        // Making the answers unclickable afet the first select
-        const answersDiv = document.getElementById('answers');
-        answersDiv!.style.pointerEvents = "none";
+        lockAnswers();
     };
 
     return (

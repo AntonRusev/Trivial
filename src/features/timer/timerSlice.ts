@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { TimerState } from "../../interfaces/TimerState";
 
 const initialState: TimerState = {
-    seconds: 15,
+    seconds: 5,
     isActive: false,
 };
 
@@ -21,7 +21,7 @@ export const timerSlice = createSlice({
         },
         resetTimer: (state) => {
             // Reseting the countdown
-            state.seconds = 0;
+            state.seconds = 5;
         },
         stopTimer: (state) => {
             // Stopping the countdown
