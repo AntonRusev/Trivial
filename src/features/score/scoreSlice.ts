@@ -39,7 +39,7 @@ export const scoreSlice = createSlice({
         },
         resetScoreState: (state) => {
             state.score = 0;
-            state.streak = 0;
+            state.streak = 1;
         },
     }
 });

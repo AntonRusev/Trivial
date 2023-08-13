@@ -26,7 +26,7 @@ export const Home = () => {
             {startGame
                 ?
                 currentQuestion > 30
-                    ? <AddScore stopGame={stopGame} />
+                    ? <AddScore stopGame={stopGame} setStartGame={setStartGame} />
                     : <div>
                         <Timer />
                         <ScoreBoard />

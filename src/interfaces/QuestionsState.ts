@@ -3,5 +3,6 @@ export interface QuestionsState {
     error: Error | null;
     questionIndex: number;
     currentQuestion: number;
+    questionIsActive: boolean;
     questionsDifficulty: string;
 };

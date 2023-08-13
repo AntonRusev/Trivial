@@ -12,6 +12,7 @@ import {
     resetQuestionState,
     changeCurrentQuestion,
     changeDifficulty,
+    activateQuestion
 } from "./questionsSlice";
 import QuestionItem from "./QuestionItem";
 import { StatusCode } from "../../utils/statusCode";
@@ -27,6 +28,7 @@ const QuestionsList = () => {
     const questionIndex = useSelector(getQuestionIndex);
     const currentQuestion = useSelector((state: any) => state.questions.currentQuestion);
     const questionsDifficulty = useSelector((state: any) => state.questions.questionsDifficulty);
+    const questionIsActive = useSelector((state: any) => state.questions.questionIsActive);
 
     // Fetch initial data upon start (first 10 questions are difficulty: east)
     useEffect(() => {
@@ -61,15 +63,21 @@ const QuestionsList = () => {
         content = <p>{error!.toString()}</p>
     };
 
+    console.log(questionIsActive)
+
     return (
         <section>
             <div>{content}</div>
-            <button onClick={() => {
-                dispatch(nextQuestionId(questionsIds.length));
-                dispatch(changeCurrentQuestion());
-            }}>
-                Next {questionIndex}
-            </button>
+            {!questionIsActive
+                ? <button onClick={() => {
+                    dispatch(nextQuestionId(questionsIds.length));
+                    dispatch(changeCurrentQuestion());
+                    dispatch(activateQuestion());
+                }}>
+                    Next Question
+                </button>
+                : <p>No</p>
+            }
         </section>
     );
 };

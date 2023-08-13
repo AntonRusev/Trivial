@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToHighScores } from "./scoreSlice";
 
 export const AddScore = ({
-    stopGame
+    stopGame,
+    setStartGame,
 }:{
-    stopGame: Function
+    stopGame: Function,
+    setStartGame: any
 }) => {
     const [formValue, setFormValue] = useState('');
 
@@ -23,6 +25,7 @@ export const AddScore = ({
         if (formValue.length > 0) {
             dispatch(addToHighScores(formValue));
             stopGame();
+            setStartGame(false);
         };
     };
 

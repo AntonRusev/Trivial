@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useQuestionFormater } from "../../hooks/useQuestionFormater";
 
-import { selectQuestionById } from "./questionsSlice";
+import {
+    activateQuestion,
+    selectQuestionById
+} from "./questionsSlice";
 import {
     scoreIncrease,
     streakBonus,
@@ -59,6 +62,7 @@ const QuestionItem = ({
         const answersDiv = document.getElementById('answers');
         answersDiv!.style.pointerEvents = "none";
         dispatch(stopTimer());
+        dispatch(activateQuestion());
     };
 
     const selectAnswer = (e: any) => {
