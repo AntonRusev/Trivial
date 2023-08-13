@@ -5,7 +5,7 @@ import QuestionsList from "../features/questions/QuestionsList";
 import { ScoreBoard } from "../features/score/ScoreBoard";
 import { Timer } from "../features/timer/Timer";
 import { AddScore } from "../features/score/AddScore";
-import { resetQuestionState } from "../features/questions/questionsSlice";
+import { resetQuestionState, activateQuestion, deactivateQuestion, } from "../features/questions/questionsSlice";
 import { resetScoreState } from "../features/score/scoreSlice";
 
 export const Home = () => {
@@ -19,6 +19,7 @@ export const Home = () => {
     const stopGame = () => {
         dispatch(resetQuestionState());
         dispatch(resetScoreState());
+        dispatch(deactivateQuestion());
     };
 
     return (
@@ -41,11 +42,14 @@ export const Home = () => {
 
                 :
                 <div>
-                    <button onClick={() => setStartGame(true)}>
+                    <button onClick={() => {
+                        setStartGame(true);
+                        dispatch(activateQuestion());
+                    }}>
                         Start Game
                     </button>
                     <div>
-                        <h3>High-Scores</h3>
+                        <h3>Your top 3 High-Scores this session:</h3>
                         {
                             highScores.length > 0
                                 ? highScores.map((h: [string, number], index: number) => <p key={index + 1}>{h[0]} : {h[1]}</p>)

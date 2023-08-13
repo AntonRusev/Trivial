@@ -35,7 +35,7 @@ export const scoreSlice = createSlice({
             state.highScores.push(entry);
 
             // Sorting the high-score list by score in descending order
-            state.highScores.sort((a, b) => b[1] - a[1]);
+            const excess = state.highScores.sort((a, b) => b[1] - a[1]).splice(3);
         },
         resetScoreState: (state) => {
             state.score = 0;

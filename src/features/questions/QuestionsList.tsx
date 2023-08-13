@@ -63,8 +63,6 @@ const QuestionsList = () => {
         content = <p>{error!.toString()}</p>
     };
 
-    console.log(questionIsActive)
-
     return (
         <section>
             <div>{content}</div>

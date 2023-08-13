@@ -48,7 +48,10 @@ const questionsSlice = createSlice({
             state.questionsDifficulty = action.payload;
         },
         activateQuestion(state) {
-            state.questionIsActive = !state.questionIsActive;
+            state.questionIsActive = true;
+        },
+        deactivateQuestion(state) {
+            state.questionIsActive = false;
         },
         resetQuestionState(state) {
             state.status = StatusCode.IDLE;
@@ -88,6 +91,6 @@ export const getQuestionsStatus = (state: any) => state.questions.status;
 export const getQuestionsError = (state: any) => state.questions.error;
 export const getQuestionIndex = (state: any) => state.questions.questionIndex;
 
-export const { resetQuestionState, nextQuestionId, changeCurrentQuestion, changeDifficulty, activateQuestion } = questionsSlice.actions;
+export const { resetQuestionState, nextQuestionId, deactivateQuestion, changeCurrentQuestion, changeDifficulty, activateQuestion } = questionsSlice.actions;
 
 export default questionsSlice.reducer;

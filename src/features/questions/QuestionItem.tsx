@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useQuestionFormater } from "../../hooks/useQuestionFormater";
 
 import {
-    activateQuestion,
+    deactivateQuestion,
     selectQuestionById
 } from "./questionsSlice";
 import {
@@ -62,7 +62,7 @@ const QuestionItem = ({
         const answersDiv = document.getElementById('answers');
         answersDiv!.style.pointerEvents = "none";
         dispatch(stopTimer());
-        dispatch(activateQuestion());
+        dispatch(deactivateQuestion());
     };
 
     const selectAnswer = (e: any) => {
