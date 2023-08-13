@@ -48,9 +48,11 @@ const questionsSlice = createSlice({
             state.questionsDifficulty = action.payload;
         },
         activateQuestion(state) {
+            // Making the current question answerable
             state.questionIsActive = true;
         },
         deactivateQuestion(state) {
+            // Making the current question non-answerable(unclickable)
             state.questionIsActive = false;
         },
         resetQuestionState(state) {

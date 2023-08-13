@@ -80,16 +80,28 @@ const QuestionItem = ({
 
     return (
         <article className="mb-8">
-            <p>Category: {question.category}</p>
-            <p>Difficulty: {question.difficulty}</p>
-            <p>{question.question.text}</p>
-            <div id="answers">
-                {/* Marking the correct answer with extra className */}
+            {/* <p>Category: {question.category}</p>
+            <p>Difficulty: {question.difficulty}</p> */}
+            <p className="p-3 my-1 text-black  bg-white">{question.question.text}</p>
+            <div id="answers" className="flex flex-col items-center mt-4 ">
+                {/* Marking the correct answer with id */}
                 {shuffledAnswers.map((a: string) => {
                     if (a === question.correctAnswer) {
-                        return <button onClick={(e) => selectAnswer(e)} key={a} name={a} id="crrct" className="mr-4 ml-4 crrc">{a}</button>
+                        return <button
+                            onClick={(e) => selectAnswer(e)}
+                            key={a} name={a}
+                            id="crrct"
+                            className="mr-4 ml-4 my-1 p-3 w-9/12 border-white border-2 border-solid p-1.5 backdrop-blur-sm">
+                            {a}
+                        </button>
                     } else {
-                        return <button onClick={(e) => selectAnswer(e)} key={a} name={a} className="mr-4 ml-4">{a}</button>
+                        return <button
+                            onClick={(e) => selectAnswer(e)}
+                            key={a}
+                            name={a}
+                            className="mr-4 ml-4 my-1 p-3 w-9/12 border-white border-2 border-solid p-1.5 backdrop-blur-sm">
+                            {a}
+                        </button>
                     }
                 })}
             </div>

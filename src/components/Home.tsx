@@ -23,25 +23,33 @@ export const Home = () => {
     };
 
     return (
-        <main>
+        <main className="text-white text-4xl w-3/4">
             {startGame
+                // If game is started
                 ?
                 currentQuestion > 30
+                    // Finishing the game and popping the add to high-score form
                     ? <AddScore stopGame={stopGame} setStartGame={setStartGame} />
-                    : <div>
-                        <Timer />
-                        <ScoreBoard />
+                    // Showing the running game 
+                    : <div className="text-center">
+                        <div className="flex flex-row justify-between p-4">
+                            <Timer />
+                            <ScoreBoard />
+                        </div>
                         <QuestionsList />
-                        <button onClick={() => {
-                            setStartGame(false);
-                            stopGame();
-                        }}>
+                        <button
+                            className="p-3 my-1 text-black  bg-white text-red-500"
+                            onClick={() => {
+                                setStartGame(false);
+                                stopGame();
+                            }}>
                             Stop Game
                         </button>
                     </div>
 
                 :
-                <div>
+                <div className="flex-initial justify-center items-center text-center">
+                    {/* If game is not started */}
                     <button onClick={() => {
                         setStartGame(true);
                         dispatch(activateQuestion());
@@ -58,6 +66,6 @@ export const Home = () => {
                     </div>
                 </div>
             }
-        </main>
+        </main >
     );
 };

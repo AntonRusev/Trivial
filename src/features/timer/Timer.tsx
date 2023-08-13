@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { activateTimer, setSeconds } from './timerSlice';
+import { setSeconds } from './timerSlice';
 
 export const Timer = () => {
     const dispatch = useDispatch();
 
     const timerSeconds = useSelector((state: any) => state.timer.seconds);
     const timerIsActive = useSelector((state: any) => state.timer.isActive);
+    const currentQuestion = useSelector((state: any) => state.questions.currentQuestion);
 
     useEffect(() => {
         let interval: any;
@@ -25,8 +26,9 @@ export const Timer = () => {
     }, [timerSeconds, timerIsActive]);
 
     return (
-        <div>
-            <p>Timer: {timerSeconds}</p>
+        <div className="flex flex-col items-start">
+            <p className="p-1">Question #: {currentQuestion}</p>
+            <p className="p-1">Timer: {timerSeconds}</p>
         </div>
     );
 };

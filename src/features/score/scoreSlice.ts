@@ -12,7 +12,7 @@ export const scoreSlice = createSlice({
     initialState,
     reducers: {
         scoreIncrease: (state, action) => {
-            // Increasing score points on correct answer
+            // Increasing score points on correct answer depending on difficulty
             if (action.payload === 'medium') {
                 state.score += (300 * state.streak);
             } else if (action.payload === 'hard') {
@@ -34,8 +34,8 @@ export const scoreSlice = createSlice({
             const entry = [action.payload, state.score];
             state.highScores.push(entry);
 
-            // Sorting the high-score list by score in descending order
-            const excess = state.highScores.sort((a, b) => b[1] - a[1]).splice(3);
+            // Sorting the top 3 entries in the high-score list by score in descending order 
+            state.highScores.sort((a, b) => b[1] - a[1]).splice(3);
         },
         resetScoreState: (state) => {
             state.score = 0;

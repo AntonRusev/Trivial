@@ -6,9 +6,9 @@ export const ScoreBoard = () => {
     const currentStreak = useSelector((state: any) => state.score.streak);
 
     return (
-        <article>
-            <p>Score: {currentScore}</p>
-            <p>Streak x{currentStreak}!</p>
-        </article>
+        <div className="flex flex-col items-end">
+            <p className="p-1">Score: {currentScore}</p>
+            <p className="p-1">Streak x{currentStreak}!</p>
+        </div>
     );
 };

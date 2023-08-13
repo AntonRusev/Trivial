@@ -67,14 +67,14 @@ const QuestionsList = () => {
         <section>
             <div>{content}</div>
             {!questionIsActive
-                ? <button onClick={() => {
+                ? <button className="p-3 my-1 text-black  bg-white" onClick={() => {
                     dispatch(nextQuestionId(questionsIds.length));
                     dispatch(changeCurrentQuestion());
                     dispatch(activateQuestion());
                 }}>
                     Next Question
                 </button>
-                : <p>No</p>
+                : <p className="p-3 my-1 text-slate-400 bg-white inline-block">Next Question</p>
             }
         </section>
     );
