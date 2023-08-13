@@ -81,7 +81,7 @@ const QuestionItem = ({
             <p>{question.question.text}</p>
             <div id="answers">
                 {/* Marking the correct answer with extra className */}
-                {shuffledAnswers.map((a) => {
+                {shuffledAnswers.map((a: string) => {
                     if (a === question.correctAnswer) {
                         return <button onClick={(e) => selectAnswer(e)} key={a} name={a} id="crrct" className="mr-4 ml-4 crrc">{a}</button>
                     } else {
