@@ -37,9 +37,13 @@ export const scoreSlice = createSlice({
             // Sorting the high-score list by score in descending order
             state.highScores.sort((a, b) => b[1] - a[1]);
         },
+        resetScoreState: (state) => {
+            state.score = 0;
+            state.streak = 0;
+        },
     }
 });
 
-export const { addToHighScores, scoreIncrease, streakBonus, streakEnd } = scoreSlice.actions;
+export const { addToHighScores, resetScoreState, scoreIncrease, streakBonus, streakEnd } = scoreSlice.actions;
 
 export default scoreSlice.reducer;

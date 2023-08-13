@@ -14,7 +14,7 @@ import { activateTimer, resetTimer, stopTimer } from '../timer/timerSlice';
 const QuestionItem = ({
     questionId
 }: {
-    questionId: string
+    questionId: any
 }) => {
     const dispatch = useDispatch();
     const question = useSelector(state => selectQuestionById(state, questionId));

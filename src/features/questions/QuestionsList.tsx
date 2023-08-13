@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { AppDispatch, RootState } from "../../app/store";
+import { AppDispatch } from "../../app/store";
 import {
     fetchQuestions,
     getQuestionIndex,
@@ -9,6 +9,7 @@ import {
     getQuestionsStatus,
     selectQuestionIds,
     nextQuestionId,
+    resetQuestionState,
     changeCurrentQuestion,
     changeDifficulty,
 } from "./questionsSlice";
@@ -44,6 +45,8 @@ const QuestionsList = () => {
             // After the first 20 questions set difficulty to hard 
             dispatch(fetchQuestions(DifficultiesCode.HARD));
             dispatch(changeDifficulty('hard'));
+        } else if (currentQuestion > 30) {
+            dispatch(resetQuestionState());
         };
     }, [currentQuestion, questionsDifficulty, dispatch]);
 
@@ -52,7 +55,6 @@ const QuestionsList = () => {
     if (questionsStatus === StatusCode.LOADING) {
         content = <p>Loading...</p>
     } else if (questionsStatus === StatusCode.SUCCEEDED) {
-        // content = questionsIds.map(questionId => <QuestionItem key={questionId} questionId={questionId} />)
         content = <QuestionItem key={questionsIds[questionIndex]} questionId={questionsIds[questionIndex]} />
     }
     else if (questionsStatus === StatusCode.FAILED) {

@@ -26,8 +26,7 @@ export const Timer = () => {
 
     return (
         <div>
-            <p>{timerSeconds}</p>
-            <button onClick={() => dispatch(activateTimer())}>Start</button>
+            <p>Timer: {timerSeconds}</p>
         </div>
     );
 };

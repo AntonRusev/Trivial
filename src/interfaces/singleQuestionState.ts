@@ -4,7 +4,7 @@ export interface singleQuestionState {
     difficulty: string;
     id: string;
     incorrectAnswers: [string];
-    isNiche: Boolean;
+    isNiche: boolean;
     question: Object;
     regions: [string];
     tags: [string];

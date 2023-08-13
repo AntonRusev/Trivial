@@ -46,6 +46,12 @@ const questionsSlice = createSlice({
         changeDifficulty(state, action) {
             state.questionsDifficulty = action.payload;
         },
+        resetQuestionState(state) {
+            state.status = StatusCode.IDLE;
+            state.questionIndex = 0;
+            state.currentQuestion = 1;
+            state.questionsDifficulty = 'easy';
+        },
     },
     extraReducers(builder) {
         builder
@@ -78,6 +84,6 @@ export const getQuestionsStatus = (state: any) => state.questions.status;
 export const getQuestionsError = (state: any) => state.questions.error;
 export const getQuestionIndex = (state: any) => state.questions.questionIndex;
 
-export const { nextQuestionId, changeCurrentQuestion, changeDifficulty } = questionsSlice.actions;
+export const { resetQuestionState, nextQuestionId, changeCurrentQuestion, changeDifficulty } = questionsSlice.actions;
 
 export default questionsSlice.reducer;
