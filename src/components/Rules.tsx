@@ -5,8 +5,13 @@ export const Rules = ({
 }) => {
 
     return (
-        <section className="position: fixed flex justify-center items-center top-0 left-0 h-full w-full z-10 bg-black-rgba">
-            <div className="flex flex-col justify-center items-center h-full text-center bg-slate-500 w-3/4 h-auto p-8 rounded-xl">
+        <section
+            onClick={() => setShowRules(false)}
+            className="position: fixed flex justify-center items-center top-0 left-0 h-full w-full z-10 bg-black-rgba"
+        >
+            <div
+                onClick={(e) => e.stopPropagation()}
+                className="flex flex-col justify-center items-center h-full text-center bg-slate-500 w-3/4 h-auto p-8 rounded-xl">
 
                 <h3 className="text-5xl font-bold italic">Rules</h3>
 
