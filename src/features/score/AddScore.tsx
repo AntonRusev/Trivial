@@ -6,7 +6,7 @@ import { addToHighScores } from "./scoreSlice";
 export const AddScore = ({
     stopGame,
     setStartGame,
-}:{
+}: {
     stopGame: Function,
     setStartGame: any
 }) => {
@@ -30,20 +30,21 @@ export const AddScore = ({
     };
 
     return (
-        <article>
+        <article className="flex flex-col justify-center items-center">
             <p>Your score is: {currentScore}</p>
-            <form>
-                <label htmlFor="enterName">Enter name:</label>
+            <form className="flex flex-col justify-center items-center p-2">
                 <input
                     id="enterName"
+                    className="text-white text-center bg-transparent border-color-white border-solid border-2 focus:bg-white focus:text-black focus:outline-none min-h-20 w-3/4"
                     name="enterName"
                     type="text"
+                    placeholder="Enter name here"
                     maxLength={10}
                     value={formValue}
                     onChange={changeHandler}
                 />
             </form>
-            <button onClick={() => addHighScore()}>Done</button>
+            <button className="p-2" onClick={() => addHighScore()}>Done</button>
         </article>
     );
 };

@@ -7,9 +7,11 @@ import { Timer } from "../features/timer/Timer";
 import { AddScore } from "../features/score/AddScore";
 import { resetQuestionState, activateQuestion, deactivateQuestion, } from "../features/questions/questionsSlice";
 import { resetScoreState } from "../features/score/scoreSlice";
+import { Rules } from "./Rules";
 
 export const Home = () => {
     const [startGame, setStartGame] = useState(false);
+    const [showRules, setShowRules] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -48,22 +50,47 @@ export const Home = () => {
                     </div>
 
                 :
-                <div className="flex-initial justify-center items-center text-center">
+                <div className="flex-initial justify-center items-center text-center min-h-[15rem]">
                     {/* If game is not started */}
-                    <button onClick={() => {
-                        setStartGame(true);
-                        dispatch(activateQuestion());
-                    }}>
+                    <button
+                        className="my-3 p-3 my-1 text-black  bg-white text-black"
+                        onClick={() => {
+                            setStartGame(true);
+                            dispatch(activateQuestion());
+                        }}>
                         Start Game
                     </button>
-                    <div>
-                        <h3>Your top 3 High-Scores this session:</h3>
+
+                    <div className="my-5">
+
+                        <button
+                            onClick={() => {
+                                setShowRules(true);
+                            }}
+                            className="my-3 p-3 my-1 text-black  bg-white text-black"
+                        >
+                            Rules
+                        </button>
                         {
                             highScores.length > 0
-                                ? highScores.map((h: [string, number], index: number) => <p key={index + 1}>{h[0]} : {h[1]}</p>)
-                                : <p>No highscores yet.</p>
+                                ?
+                                <div>
+                                    <h3 className="my-5">Top 3 High-Scores this session:</h3>
+                                    {highScores.map((h: [string, number], index: number) => {
+                                        return <p className="border-white border-solid border-2 py-2 my-1" key={index + 1}>{h[0]} : {h[1]}</p>
+                                    })}
+                                </div>
+                                :
+                                <p>No highscores yet.</p>
                         }
                     </div>
+
+                    {/* Rules Modal  */}
+                    {
+                        showRules
+                            ? <Rules setShowRules={setShowRules} />
+                            : ''
+                    }
                 </div>
             }
         </main >

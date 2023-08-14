@@ -1,5 +1,5 @@
-html { 
-    background: url('https://images.unsplash.com/photo-1620130674275-d709994ed7c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2075&q=80') no-repeat center center fixed; 
+html {
+    background: url('https://images.unsplash.com/photo-1620130674275-d709994ed7c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2075&q=80') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -15,4 +15,35 @@ html {
     font-family: 'Alkatra', cursive;
 }
 
+#item {
+    -webkit-animation: fadein 0.5s ease-in;
+    -moz-animation: fadein 0.5s ease-in;
+    animation: fadein 0.5s ease-in;
+}
 
+@keyframes fadein {
+    0% {
+        opacity: 0;
+        backdrop-filter: blur(4px)
+    }
+
+    30% {
+        opacity: 0;
+        backdrop-filter: blur(4px)
+    }
+
+    70% {
+        opacity: 0;
+        backdrop-filter: blur(4px)
+    }
+
+    90% {
+        opacity: 0;
+        backdrop-filter: blur(4px)
+    }
+
+    100% {
+        opacity: 1;
+        backdrop-filter: blur(0px)
+    }
+}

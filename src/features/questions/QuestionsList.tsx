@@ -17,6 +17,7 @@ import {
 import QuestionItem from "./QuestionItem";
 import { StatusCode } from "../../utils/statusCode";
 import { DifficultiesCode } from "../../utils/difficultiesCode";
+import { getContentElement } from "../../utils/getContent";
 
 
 const QuestionsList = () => {
@@ -50,6 +51,7 @@ const QuestionsList = () => {
         } else if (currentQuestion > 30) {
             dispatch(resetQuestionState());
         };
+        getContentElement(currentQuestion);
     }, [currentQuestion, questionsDifficulty, dispatch]);
 
     let content;
@@ -65,7 +67,7 @@ const QuestionsList = () => {
 
     return (
         <section>
-            <div>{content}</div>
+            <div id="content" className="min-h-[15rem]">{content}</div>
             {!questionIsActive
                 ? <button className="p-3 my-1 text-black  bg-white" onClick={() => {
                     dispatch(nextQuestionId(questionsIds.length));

@@ -79,9 +79,7 @@ const QuestionItem = ({
     };
 
     return (
-        <article className="mb-8">
-            {/* <p>Category: {question.category}</p>
-            <p>Difficulty: {question.difficulty}</p> */}
+        <article id="item" className="mb-8">
             <p className="p-3 my-1 text-black  bg-white">{question.question.text}</p>
             <div id="answers" className="flex flex-col items-center mt-4 ">
                 {/* Marking the correct answer with id */}
