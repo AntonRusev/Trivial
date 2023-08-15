@@ -7,11 +7,11 @@ export const Rules = ({
     return (
         <section
             onClick={() => setShowRules(false)}
-            className="position: fixed flex justify-center items-center top-0 left-0 h-full w-full z-10 bg-black-rgba"
+            className="fixed flex justify-center items-center top-0 left-0 h-full w-full z-10 bg-black-rgba"
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="flex flex-col justify-center items-center h-[100%] text-center bg-slate-500 w-3/4 p-8 rounded-xl overflow-auto my-2">
+                className="flex flex-col items-center h-full 2xl:h-auto text-center bg-slate-500 w-3/4 p-8 overflow-auto my-2">
 
                 <h3 className="text-5xl font-bold italic">Rules</h3>
 

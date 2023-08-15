@@ -25,7 +25,7 @@ export const Home = () => {
     };
 
     return (
-        <main className="text-white text-2xl w-3/4 overflow-y-auto">
+        <main className="text-white text-2xl xl:text-4xl w-3/4 overflow-y-auto lg:overflow-y-hidden">
             {startGame
                 // If game is started
                 ?
@@ -67,7 +67,7 @@ export const Home = () => {
                             onClick={() => {
                                 setShowRules(true);
                             }}
-                            className="my-3 p-3 my-1 text-black  bg-white text-black"
+                            className="mb-7 p-3 my-1 text-black  bg-white text-black"
                         >
                             Rules
                         </button>
