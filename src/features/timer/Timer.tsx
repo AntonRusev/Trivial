@@ -28,7 +28,7 @@ export const Timer = () => {
     return (
         <div className="flex flex-col items-start">
             <p className="p-1">Question #: {currentQuestion}</p>
-            <p className="p-1">Timer: <span id="pulse">{timerSeconds}</span></p>
+            <p className="p-1">Timer: <span className="animate-pulse">{timerSeconds}</span></p>
         </div>
     );
 };

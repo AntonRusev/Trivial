@@ -11,7 +11,7 @@ export const Rules = ({
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="flex flex-col justify-center items-center h-full text-center bg-slate-500 w-3/4 h-auto p-8 rounded-xl">
+                className="flex flex-col justify-center items-center h-[100%] text-center bg-slate-500 w-3/4 p-8 rounded-xl overflow-auto my-2">
 
                 <h3 className="text-5xl font-bold italic">Rules</h3>
 

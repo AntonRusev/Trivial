@@ -79,7 +79,7 @@ const QuestionItem = ({
     };
 
     return (
-        <article id="item" className="mb-8">
+        <article className="mb-8 animate-fadein">
             <p className="p-3 my-1 text-black  bg-white">{question.question.text}</p>
             <div id="answers" className="flex flex-col items-center mt-4 ">
                 {/* Marking the correct answer with id */}
@@ -89,7 +89,7 @@ const QuestionItem = ({
                             onClick={(e) => selectAnswer(e)}
                             key={a} name={a}
                             id="crrct"
-                            className="mr-4 ml-4 my-1 p-3 w-9/12 border-white border-2 border-solid p-1.5 backdrop-blur-sm">
+                            className="mr-4 ml-4 my-1 p-3 w-9/12 border-white border-2 border-solid backdrop-blur-sm">
                             {a}
                         </button>
                     } else {
@@ -97,7 +97,7 @@ const QuestionItem = ({
                             onClick={(e) => selectAnswer(e)}
                             key={a}
                             name={a}
-                            className="mr-4 ml-4 my-1 p-3 w-9/12 border-white border-2 border-solid p-1.5 backdrop-blur-sm">
+                            className="mr-4 ml-4 my-1 p-3 w-9/12 border-white border-2 border-solid backdrop-blur-sm">
                             {a}
                         </button>
                     }

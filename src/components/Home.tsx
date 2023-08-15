@@ -25,7 +25,7 @@ export const Home = () => {
     };
 
     return (
-        <main className="text-white text-4xl w-3/4">
+        <main className="text-white text-2xl w-3/4 overflow-y-auto">
             {startGame
                 // If game is started
                 ?
