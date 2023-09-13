@@ -1,14 +1,14 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 
 import { setSeconds } from './timerSlice';
 
 export const Timer = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const timerSeconds = useSelector((state: any) => state.timer.seconds);
-    const timerIsActive = useSelector((state: any) => state.timer.isActive);
-    const currentQuestion = useSelector((state: any) => state.questions.currentQuestion);
+    const timerSeconds = useAppSelector((state: any) => state.timer.seconds);
+    const timerIsActive = useAppSelector((state: any) => state.timer.isActive);
+    const currentQuestion = useAppSelector((state: any) => state.questions.currentQuestion);
 
     useEffect(() => {
         let interval: any;

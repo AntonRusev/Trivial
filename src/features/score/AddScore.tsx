@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 
 import { addToHighScores } from "./scoreSlice";
 
@@ -12,8 +12,8 @@ export const AddScore = ({
 }) => {
     const [formValue, setFormValue] = useState('');
 
-    const dispatch = useDispatch();
-    const currentScore = useSelector((state: any) => state.score.score);
+    const dispatch = useAppDispatch();
+    const currentScore = useAppSelector((state: any) => state.score.score);
 
     // Input Form change handler
     const changeHandler = (e: any) => {

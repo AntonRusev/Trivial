@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 
 import { useQuestionFormater } from "../../hooks/useQuestionFormater";
 
@@ -19,11 +19,11 @@ const QuestionItem = ({
 }: {
     questionId: any
 }) => {
-    const dispatch = useDispatch();
-    const question = useSelector(state => selectQuestionById(state, questionId));
-    const questionsDifficulty = useSelector((state: any) => state.questions.questionsDifficulty);
-    const timerSeconds = useSelector((state: any) => state.timer.seconds);
-    const timerIsActive = useSelector((state: any) => state.timer.isActive);
+    const dispatch = useAppDispatch();
+    const question = useAppSelector(state => selectQuestionById(state, questionId));
+    const questionsDifficulty = useAppSelector((state: any) => state.questions.questionsDifficulty);
+    const timerSeconds = useAppSelector((state: any) => state.timer.seconds);
+    const timerIsActive = useAppSelector((state: any) => state.timer.isActive);
 
     const { shuffledAnswers } = useQuestionFormater(question);
 
@@ -80,7 +80,8 @@ const QuestionItem = ({
 
     return (
         <article className="mb-8 animate-fadein">
-            <p className="p-3 my-1 text-black  bg-white">{question.question.text}</p>
+            {/* setting data-testid for unit testing */}
+            <p className="p-3 my-1 text-black  bg-white" data-testid="quiz-question-p">{question.question.text}</p>
             <div id="answers" className="flex flex-col items-center mt-4 ">
                 {/* Marking the correct answer with id */}
                 {shuffledAnswers.map((a: string) => {

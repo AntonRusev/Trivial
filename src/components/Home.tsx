@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../utils/redux-hooks";
 
 import QuestionsList from "../features/questions/QuestionsList";
 import { ScoreBoard } from "../features/score/ScoreBoard";
@@ -13,10 +13,10 @@ export const Home = () => {
     const [startGame, setStartGame] = useState(false);
     const [showRules, setShowRules] = useState(false);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const currentQuestion = useSelector((state: any) => state.questions.currentQuestion);
-    const highScores = useSelector((state: any) => state.score.highScores);
+    const currentQuestion = useAppSelector((state: any) => state.questions.currentQuestion);
+    const highScores = useAppSelector((state: any) => state.score.highScores);
 
     const stopGame = () => {
         dispatch(resetQuestionState());

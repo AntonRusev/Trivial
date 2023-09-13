@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
-import { AppDispatch } from "../../app/store";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import {
     fetchQuestions,
     getQuestionIndex,
@@ -21,15 +19,15 @@ import { getContentElement } from "../../utils/getContent";
 
 
 const QuestionsList = () => {
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
-    const questionsIds = useSelector(selectQuestionIds);
-    const questionsStatus = useSelector(getQuestionsStatus);
-    const error = useSelector(getQuestionsError);
-    const questionIndex = useSelector(getQuestionIndex);
-    const currentQuestion = useSelector((state: any) => state.questions.currentQuestion);
-    const questionsDifficulty = useSelector((state: any) => state.questions.questionsDifficulty);
-    const questionIsActive = useSelector((state: any) => state.questions.questionIsActive);
+    const questionsIds = useAppSelector(selectQuestionIds);
+    const questionsStatus = useAppSelector(getQuestionsStatus);
+    const error = useAppSelector(getQuestionsError);
+    const questionIndex = useAppSelector(getQuestionIndex);
+    const currentQuestion = useAppSelector((state: any) => state.questions.currentQuestion);
+    const questionsDifficulty = useAppSelector((state: any) => state.questions.questionsDifficulty);
+    const questionIsActive = useAppSelector((state: any) => state.questions.questionIsActive);
 
     // Fetch initial data upon start (first 10 questions are difficulty: east)
     useEffect(() => {
