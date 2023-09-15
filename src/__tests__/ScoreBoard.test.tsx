@@ -31,14 +31,14 @@ describe('Testing the Header Component', () => {
             store.dispatch(scoreIncrease('hard'));
         });
 
-        // Answering Hard question awards 500 points * Strek bonus(2) = 1000;
+        // Answering Hard question awards 500 points * Streak bonus(2) = 1000;
         expect(screen.getByText(/Score:/i)).toBeInTheDocument();
         expect(screen.getByText(/1000/i)).toBeInTheDocument();
         expect(screen.getByText(/Streak x/i)).toBeInTheDocument();
         expect(screen.getByText(/2/i)).toBeInTheDocument();
     });
 
-    test('renders proper score and streak on easy medium', async () => {
+    test('renders proper score and streak on medium difficulty', async () => {
         render(
             <Provider store={store}>
                 <ScoreBoard />
@@ -50,14 +50,14 @@ describe('Testing the Header Component', () => {
             store.dispatch(scoreIncrease('medium'));
         });
 
-        // Answering Medium question awards 300 points * Strek bonus(3) = 900 (+1000 from previous = 1900);
+        // Answering Medium question awards 300 points * Streak bonus(3) = 900 (+1000 from previous = 1900);
         expect(screen.getByText(/Score:/i)).toBeInTheDocument();
         expect(screen.getByText(/1900/i)).toBeInTheDocument();
         expect(screen.getByText(/Streak x/i)).toBeInTheDocument();
         expect(screen.getByText(/3/i)).toBeInTheDocument();
     });
 
-    test('renders proper score and streak on easy easy', async () => {
+    test('renders proper score and streak on easy difficulty', async () => {
         render(
             <Provider store={store}>
                 <ScoreBoard />
@@ -69,7 +69,7 @@ describe('Testing the Header Component', () => {
             store.dispatch(scoreIncrease('easy'));
         });
 
-        // Answering Easy question awards 100 points * Strek bonus(4) = 400 (+1900 from previous = 2300);
+        // Answering Easy question awards 100 points * Streak bonus(4) = 400 (+1900 from previous = 2300);
         expect(screen.getByText(/Score:/i)).toBeInTheDocument();
         expect(screen.getByText(/2300/i)).toBeInTheDocument();
         expect(screen.getByText(/Streak x/i)).toBeInTheDocument();
@@ -88,7 +88,7 @@ describe('Testing the Header Component', () => {
             store.dispatch(scoreIncrease('easy'));
         });
 
-        // Answering Easy question awards 100 points * Strek bonus(1) = 100 (+2300 from previous = 2400);
+        // Answering Easy question awards 100 points * Streak bonus(1) = 100 (+2300 from previous = 2400);
         expect(screen.getByText(/Score:/i)).toBeInTheDocument();
         expect(screen.getByText(/2400/i)).toBeInTheDocument();
         expect(screen.getByText(/Streak x/i)).toBeInTheDocument();
